@@ -39,8 +39,22 @@ def getVersion(device):
     version = out.stdout.read().splitlines()
     return version[0].decode('utf-8')
 
+
 def devReboot(device):
     cmd = "adb -s %s reboot" % device
+    subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE)
+
+
+def installapp(path):
+    cmd = "adb install %s" % path
+    subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE)
+
+def screencap():
+    filename = time.strftime("%Y%m%d%H%M%S")
+    cmd = "adb shell screencap -p /sdcard/%s.png" % filename
+    subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE)
+    time.sleep(2)
+    cmd = "adb pull /sdcard/%s.png" % filename
     subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE)
 
 def getPid(device,process):

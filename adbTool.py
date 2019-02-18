@@ -20,14 +20,15 @@ class MyForm(QWidget, Ui_Form):
         devices = getDevicesInfo()
         try:
             self.device = devices[0]
-            device1 = QTreeWidgetItem(self.treeWidget)
-            device1.setText(0, devices[0])
-            device2 = QTreeWidgetItem(self.treeWidget)
-            device2.setText(0, devices[1])
-            device3 = QTreeWidgetItem(self.treeWidget)
-            device3.setText(0, devices[2])
+            QTreeWidgetItem(self.treeWidget).setText(0, devices[0])
+            QTreeWidgetItem(self.treeWidget).setText(0, devices[1])
+            QTreeWidgetItem(self.treeWidget).setText(0, devices[2])
         except:
             pass
+
+    def reload(self):
+        self.loadDev()
+        self.textBrowser.setText('刷新成功！')
 
     def chooseDev(self):
         item = self.treeWidget.currentItem()
@@ -40,17 +41,29 @@ class MyForm(QWidget, Ui_Form):
         self.textBrowser.setText(msg)
 
     def reboot(self):
+        if self.device == '':
+            self.textBrowser.setText('未连接设备！')
+            return
         self.textBrowser.setText('重启中。。。')
         self.thread = RunThread(self.device)
         self.thread.start()
         self.thread.trigger.connect(self.TimeStop)
+
+    def choose(self):
+        self.filename = QFileDialog.getOpenFileName(self, 'open file', '/')
+        if self.filename[0]:
+            self.lineEdit.setText(self.filename[0])
+
+    def install(self):
+        installapp(self.filename[0])
 
     def TimeStop(self):
         self.textBrowser.setText('重启完成！')
 
 
     def screencap(self):
-        self.textBrowser.setText('捏爆')
+        screencap()
+        self.textBrowser.setText('截图成功！')
 
     def log(self):
         pass
@@ -75,7 +88,7 @@ class RunThread(QThread):
         devReboot(self.device)
         while True:
             devices = getDevicesInfo()
-            time.sleep(10)
+            time.sleep(2)
             if devices != -1:
                 self.trigger.emit()
             else:

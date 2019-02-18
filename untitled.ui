@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>640</width>
+    <width>819</width>
     <height>480</height>
    </rect>
   </property>
@@ -31,8 +31,8 @@
   <widget class="QPushButton" name="pushButton">
    <property name="geometry">
     <rect>
-     <x>240</x>
-     <y>40</y>
+     <x>250</x>
+     <y>30</y>
      <width>101</width>
      <height>41</height>
     </rect>
@@ -44,8 +44,8 @@
   <widget class="QPushButton" name="pushButton_2">
    <property name="geometry">
     <rect>
-     <x>380</x>
-     <y>40</y>
+     <x>440</x>
+     <y>30</y>
      <width>101</width>
      <height>41</height>
     </rect>
@@ -57,8 +57,8 @@
   <widget class="QPushButton" name="pushButton_3">
    <property name="geometry">
     <rect>
-     <x>520</x>
-     <y>40</y>
+     <x>640</x>
+     <y>30</y>
      <width>101</width>
      <height>41</height>
     </rect>
@@ -72,9 +72,61 @@
     <rect>
      <x>180</x>
      <y>280</y>
-     <width>451</width>
+     <width>601</width>
      <height>192</height>
     </rect>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_4">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>450</y>
+     <width>171</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>刷新</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_5">
+   <property name="geometry">
+    <rect>
+     <x>530</x>
+     <y>210</y>
+     <width>101</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>选择</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_6">
+   <property name="geometry">
+    <rect>
+     <x>650</x>
+     <y>210</y>
+     <width>101</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>安装</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="lineEdit">
+   <property name="geometry">
+    <rect>
+     <x>180</x>
+     <y>210</y>
+     <width>341</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="readOnly">
+    <bool>true</bool>
    </property>
   </widget>
  </widget>
@@ -128,10 +180,61 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>pushButton_4</sender>
+   <signal>clicked()</signal>
+   <receiver>Form</receiver>
+   <slot>reload()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>111</x>
+     <y>458</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>98</x>
+     <y>478</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_5</sender>
+   <signal>clicked()</signal>
+   <receiver>Form</receiver>
+   <slot>choose()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>506</x>
+     <y>235</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>460</x>
+     <y>168</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_6</sender>
+   <signal>clicked()</signal>
+   <receiver>Form</receiver>
+   <slot>install()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>583</x>
+     <y>218</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>566</x>
+     <y>174</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>reboot()</slot>
   <slot>screencap()</slot>
   <slot>log()</slot>
+  <slot>reload()</slot>
+  <slot>choose()</slot>
+  <slot>install()</slot>
  </slots>
 </ui>
