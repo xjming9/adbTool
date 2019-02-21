@@ -12,6 +12,7 @@ class MyForm(QWidget, Ui_Form):
         super(MyForm, self).__init__()
         self.status = ''
         self.device = ''
+        self.filename = ''
         self.setupUi(self)
         self.loadDev()
         self.treeWidget.clicked.connect(self.chooseDev)
@@ -50,12 +51,21 @@ class MyForm(QWidget, Ui_Form):
         self.thread.trigger.connect(self.TimeStop)
 
     def choose(self):
+        self.textBrowser.setText('')
         self.filename = QFileDialog.getOpenFileName(self, 'open file', '/')
         if self.filename[0]:
-            self.lineEdit.setText(self.filename[0])
+            if re.match('.*?apk', self.filename[0]):
+                self.lineEdit.setText(self.filename[0])
+            else:
+                # self.filename[0] = ''
+                self.textBrowser.setText('请选择正确的安装包！')
+
 
     def install(self):
-        installapp(self.filename[0])
+        if not self.filename:
+            installapp(self.filename[0])
+        else:
+            self.textBrowser.setText('请选择安装包！')
 
     def TimeStop(self):
         self.textBrowser.setText('重启完成！')
