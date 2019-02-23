@@ -12,6 +12,7 @@ class MyForm(QWidget, Ui_Form):
         super(MyForm, self).__init__()
         self.status = ''
         self.device = ''
+        self.devices = 0  # 设备数量
         self.filename = ''
         self.setupUi(self)
         self.loadDev()
@@ -19,15 +20,23 @@ class MyForm(QWidget, Ui_Form):
 
     def loadDev(self):  # 加载设备
         devices = getDevicesInfo()
+        if devices == -1:
+            self.devices = 0
+            self.label.setText('未连接设备')
+        else:
+            self.devices = len(devices)
+            self.label.setText('已连接%d台设备' % self.devices)
         try:
-            self.device = devices[0]
-            QTreeWidgetItem(self.treeWidget).setText(0, devices[0])
-            QTreeWidgetItem(self.treeWidget).setText(0, devices[1])
-            QTreeWidgetItem(self.treeWidget).setText(0, devices[2])
+            self.device = devices[0]  # 默认第一个设备为当前设备
+            for i in range(len(devices)):
+                QTreeWidgetItem(self.treeWidget).setText(0, devices[i])
         except:
             pass
 
     def reload(self):
+        if not self.devices == 0:
+            for i in range(self.devices):
+                self.treeWidget.takeTopLevelItem(i)
         self.loadDev()
         self.textBrowser.setText('刷新成功！')
 
@@ -72,11 +81,17 @@ class MyForm(QWidget, Ui_Form):
 
 
     def screencap(self):
-        screencap()
-        self.textBrowser.setText('截图成功！')
+        filename = time.strftime("%Y%m%d%H%M%S")
+        date = time.strftime("%Y%m%d")
+        path = os.path.join(os.path.split(os.path.realpath(__file__))[0], r'screencap\%s' % date)
+        if not os.path.exists(path):
+            os.makedirs(path)
+        screencap(filename, os.path.join(path, '%s.png' % filename))
+        self.textBrowser.setText('截图成功！\n保存路径：%s' % os.path.join(path, '%s.png' % filename))
 
     def log(self):
         pass
+
 
 class RunThread(QThread):
         # python3,pyqt5与之前的版本有些不一样

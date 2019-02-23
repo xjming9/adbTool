@@ -2,11 +2,12 @@
 
 # Form implementation generated from reading ui file 'untitled.ui'
 #
-# Created by: PyQt5 UI code generator 5.11.3
+# Created by: PyQt5 UI code generator 5.12
 #
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+
 
 class Ui_Form(object):
     def setupUi(self, Form):
@@ -30,16 +31,23 @@ class Ui_Form(object):
         self.pushButton_4 = QtWidgets.QPushButton(Form)
         self.pushButton_4.setGeometry(QtCore.QRect(0, 450, 171, 21))
         self.pushButton_4.setObjectName("pushButton_4")
-        self.pushButton_5 = QtWidgets.QPushButton(Form)
-        self.pushButton_5.setGeometry(QtCore.QRect(530, 210, 101, 41))
-        self.pushButton_5.setObjectName("pushButton_5")
-        self.pushButton_6 = QtWidgets.QPushButton(Form)
-        self.pushButton_6.setGeometry(QtCore.QRect(650, 210, 101, 41))
-        self.pushButton_6.setObjectName("pushButton_6")
-        self.lineEdit = QtWidgets.QLineEdit(Form)
-        self.lineEdit.setGeometry(QtCore.QRect(180, 210, 341, 41))
+        self.groupBox = QtWidgets.QGroupBox(Form)
+        self.groupBox.setGeometry(QtCore.QRect(180, 160, 601, 101))
+        self.groupBox.setObjectName("groupBox")
+        self.lineEdit = QtWidgets.QLineEdit(self.groupBox)
+        self.lineEdit.setGeometry(QtCore.QRect(10, 40, 341, 41))
         self.lineEdit.setReadOnly(True)
         self.lineEdit.setObjectName("lineEdit")
+        self.pushButton_5 = QtWidgets.QPushButton(self.groupBox)
+        self.pushButton_5.setGeometry(QtCore.QRect(370, 40, 101, 41))
+        self.pushButton_5.setObjectName("pushButton_5")
+        self.pushButton_6 = QtWidgets.QPushButton(self.groupBox)
+        self.pushButton_6.setGeometry(QtCore.QRect(490, 40, 101, 41))
+        self.pushButton_6.setObjectName("pushButton_6")
+        self.label = QtWidgets.QLabel(Form)
+        self.label.setGeometry(QtCore.QRect(10, 415, 151, 21))
+        self.label.setText("")
+        self.label.setObjectName("label")
 
         self.retranslateUi(Form)
         self.pushButton.clicked.connect(Form.reboot)
@@ -58,6 +66,8 @@ class Ui_Form(object):
         self.pushButton_2.setText(_translate("Form", "截图"))
         self.pushButton_3.setText(_translate("Form", "日志"))
         self.pushButton_4.setText(_translate("Form", "刷新"))
+        self.groupBox.setTitle(_translate("Form", "程序安装"))
         self.pushButton_5.setText(_translate("Form", "选择"))
         self.pushButton_6.setText(_translate("Form", "安装"))
+
 
