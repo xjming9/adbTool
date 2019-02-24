@@ -45,16 +45,16 @@ def devReboot(device):
     subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE)
 
 
-def installapp(path):
-    cmd = "adb install %s" % path
+def installapp(device, path):
+    cmd = "adb -s %s install %s" % (device, path)
     subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE)
 
 
-def screencap(filename, path):
-    cmd = "adb shell screencap -p /sdcard/%s.png" % filename
+def screencap(device, filename, path):
+    cmd = "adb -s %s shell screencap -p /sdcard/%s.png" % (device, filename)
     subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE)
-    time.sleep(2)
-    cmd = "adb pull /sdcard/%s.png %s" % (filename, path)
+    time.sleep(5)
+    cmd = "adb -s %s pull /sdcard/%s.png %s" % (device, filename, path)
     subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE)
 
 def getPid(device,process):
@@ -90,4 +90,4 @@ def stopMonkey(devices):
     pass
 
 if __name__=='__main__':
-    screencap('123', 'D:adbTool/123.png')
+    installapp('95dfacd9', r'D:\python\appium\app\baidu_43013504.apk')

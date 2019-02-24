@@ -11,9 +11,9 @@ class MyForm(QWidget, Ui_Form):
     def __init__(self):
         super(MyForm, self).__init__()
         self.status = ''
-        self.device = ''
+        self.device = ''  # 当前设备
         self.devices = 0  # 设备数量
-        self.filename = ''
+        self.package = ''  # 程序包路径
         self.setupUi(self)
         self.loadDev()
         self.treeWidget.clicked.connect(self.chooseDev)
@@ -22,7 +22,7 @@ class MyForm(QWidget, Ui_Form):
         devices = getDevicesInfo()
         if devices == -1:
             self.devices = 0
-            self.label.setText('未连接设备')
+            self.showresult('未连接设备')
         else:
             self.devices = len(devices)
             self.label.setText('已连接%d台设备' % self.devices)
@@ -38,7 +38,7 @@ class MyForm(QWidget, Ui_Form):
             for i in range(self.devices):
                 self.treeWidget.takeTopLevelItem(i)
         self.loadDev()
-        self.textBrowser.setText('刷新成功！')
+        self.showresult('刷新成功！')
 
     def chooseDev(self):
         item = self.treeWidget.currentItem()
@@ -48,49 +48,62 @@ class MyForm(QWidget, Ui_Form):
         screen = getDecScreen(self.device)
         version = getVersion(self.device)
         msg = '设备名称：%s\n屏幕分辨率：%s\n系统版本：%s' % (name, screen, version)
-        self.textBrowser.setText(msg)
+        self.showresult(msg)
 
     def reboot(self):
         if self.device == '':
-            self.textBrowser.setText('未连接设备！')
+            self.showresult('未连接设备！')
             return
-        self.textBrowser.setText('重启中。。。')
-        self.thread = RunThread(self.device)
-        self.thread.start()
-        self.thread.trigger.connect(self.TimeStop)
+        self.showresult('重启中。。。')
+        thread = RunThread(self.device)
+        thread.start()
+        thread.trigger.connect(self.TimeStop)
 
     def choose(self):
         self.textBrowser.setText('')
-        self.filename = QFileDialog.getOpenFileName(self, 'open file', '/')
-        if self.filename[0]:
-            if re.match('.*?apk', self.filename[0]):
-                self.lineEdit.setText(self.filename[0])
+        self.package = QFileDialog.getOpenFileName(self, 'open file', '/')
+        if self.package[0]:
+            if re.match('.*?apk', self.package[0]):
+                self.lineEdit.setText(self.package[0])
             else:
                 # self.filename[0] = ''
-                self.textBrowser.setText('请选择正确的安装包！')
+                self.package = ''
+                self.showresult('请选择正确的安装包！')
 
 
     def install(self):
-        if not self.filename:
-            installapp(self.filename[0])
+        if self.package:
+            installapp(self.device, self.package[0])
         else:
-            self.textBrowser.setText('请选择安装包！')
+            self.showresult('请选择安装包！')
 
     def TimeStop(self):
-        self.textBrowser.setText('重启完成！')
+        self.showresult('重启完成！')
 
 
     def screencap(self):
+        self.showresult('正在截图！')
+        if self.device == '':
+            self.showresult('未连接设备！')
+            return
+        self.textBrowser.setText('')
         filename = time.strftime("%Y%m%d%H%M%S")
         date = time.strftime("%Y%m%d")
         path = os.path.join(os.path.split(os.path.realpath(__file__))[0], r'screencap\%s' % date)
         if not os.path.exists(path):
             os.makedirs(path)
-        screencap(filename, os.path.join(path, '%s.png' % filename))
-        self.textBrowser.setText('截图成功！\n保存路径：%s' % os.path.join(path, '%s.png' % filename))
+        screencap(self.device, filename, os.path.join(path, '%s.png' % filename))
+        time.sleep(2)
+        self.label_2.setScaledContents(True)
+        self.label_2.setPixmap(QPixmap(os.path.join(path, '%s.png' % filename)))
+        self.showresult('截图成功！\n保存路径：%s' % os.path.join(path, '%s.png' % filename))
 
     def log(self):
         pass
+
+    def showresult(self, result):
+        now = time.strftime('%Y-%m-%d %H:%M:%S')
+        self.textBrowser.setText(now+'\n'+result)
 
 
 class RunThread(QThread):
@@ -113,7 +126,7 @@ class RunThread(QThread):
         devReboot(self.device)
         while True:
             devices = getDevicesInfo()
-            time.sleep(2)
+            time.sleep(10)
             if devices != -1:
                 self.trigger.emit()
             else:
@@ -124,7 +137,6 @@ class RunThread(QThread):
         # 信号焕发，我是通过我封装类的回调来发起的
         # self._signal.emit(msg)
         pass
-
 
 
 if __name__ == '__main__':
