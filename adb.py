@@ -40,21 +40,49 @@ def getVersion(device):
     return version[0].decode('utf-8')
 
 
+def getip(device):
+    #cmd = "adb -s %s shell ifconfig | grep Mask" % device
+    #out = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE)
+    #ip = out.stdout.read().splitlines()
+    #return ip[0].decode('utf-8')
+    return '该功能调试中。。。'
+
 def devReboot(device):
     cmd = "adb -s %s reboot" % device
     subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE)
 
 
-def installapp(path):
-    cmd = "adb install %s" % path
+def installapp(device, path):
+    cmd = "adb -s %s install %s" % (device, path)
     subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE)
 
-def screencap():
-    filename = time.strftime("%Y%m%d%H%M%S")
-    cmd = "adb shell screencap -p /sdcard/%s.png" % filename
+
+def lightscreen(device):
+    cmd = "adb -s %s shell input keyevent 26" % device
     subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE)
-    time.sleep(2)
-    cmd = "adb pull /sdcard/%s.png" % filename
+
+
+def unlock(device):
+    cmd = "adb -s %s shell input keyevent 26" % device
+    subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE)
+    time.sleep(1)
+    cmd = "adb -s %s shell input swipe 300 1000 300 500" % device
+    subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE)
+
+
+def log(device, path):
+    cmd = "adb -s %s logcat> %s" % (device, path)
+    subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE)
+
+def screenrecord(device):
+    cmd = "adb -s %s shell screenrecord /sdcard/filename.mp4" % device
+    subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE)
+
+def screencap(device, filename, path):
+    cmd = "adb -s %s shell screencap -p /sdcard/%s.png" % (device, filename)
+    subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE)
+    time.sleep(4)
+    cmd = "adb -s %s pull /sdcard/%s.png %s" % (device, filename, path)
     subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE)
 
 def getPid(device,process):
@@ -90,5 +118,4 @@ def stopMonkey(devices):
     pass
 
 if __name__=='__main__':
-    devices = getDevicesInfo()
-    print(devices)
+    installapp('95dfacd9', r'D:\python\appium\app\baidu_43013504.apk')
