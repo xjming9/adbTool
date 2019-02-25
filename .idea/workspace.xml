@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="82002814-34ef-4e5e-9afc-3348fcba5bdd" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/adbTool.py" beforeDir="false" afterPath="$PROJECT_DIR$/adbTool.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -25,8 +24,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/adbTool.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="380">
-              <caret line="59" column="39" lean-forward="true" selection-start-line="59" selection-start-column="39" selection-end-line="59" selection-end-column="39" />
+            <state relative-caret-position="342">
+              <caret line="72" lean-forward="true" selection-start-line="72" selection-end-line="72" />
               <folding>
                 <element signature="e#22#51#0" expanded="true" />
               </folding>
@@ -222,11 +221,25 @@
       <option name="presentableId" value="Default" />
       <updated>1550190125071</updated>
     </task>
+    <task id="LOCAL-00001" summary="下载功能修改">
+      <created>1550738414273</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1550738414274</updated>
+    </task>
+    <task id="LOCAL-00002" summary="下载功能修改">
+      <created>1550738480697</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1550738480697</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
     <layout>
       <window_info id="Favorites" order="0" side_tool="true" />
       <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.24973656" />
@@ -236,8 +249,8 @@
       <window_info anchor="bottom" id="Python Console" order="2" weight="0.32936078" />
       <window_info anchor="bottom" id="Message" order="3" />
       <window_info anchor="bottom" id="Find" order="4" />
-      <window_info anchor="bottom" id="Version Control" order="5" weight="0.32936078" />
-      <window_info active="true" anchor="bottom" id="Run" order="6" visible="true" weight="0.32936078" />
+      <window_info active="true" anchor="bottom" id="Version Control" order="5" visible="true" weight="0.32936078" />
+      <window_info anchor="bottom" id="Run" order="6" weight="0.32936078" />
       <window_info anchor="bottom" id="Debug" order="7" weight="0.3997833" />
       <window_info anchor="bottom" id="Cvs" order="8" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="9" weight="0.4" />
@@ -246,6 +259,10 @@
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
     </layout>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="下载功能修改" />
+    <option name="LAST_COMMIT_MESSAGE" value="下载功能修改" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -302,8 +319,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/adbTool.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="380">
-          <caret line="59" column="39" lean-forward="true" selection-start-line="59" selection-start-column="39" selection-end-line="59" selection-end-column="39" />
+        <state relative-caret-position="342">
+          <caret line="72" lean-forward="true" selection-start-line="72" selection-end-line="72" />
           <folding>
             <element signature="e#22#51#0" expanded="true" />
           </folding>
